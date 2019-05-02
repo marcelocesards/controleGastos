@@ -1,4 +1,4 @@
-package br.com.controleGastos.controleGastos.jms.consumer;
+package br.com.controleGastos.controleGastos.jms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;

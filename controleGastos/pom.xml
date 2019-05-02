@@ -74,8 +74,17 @@
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
-		    </dependency>
-			
+		</dependency>
+		<dependency>
+			<groupId>com.mockrunner</groupId>
+			<artifactId>mockrunner-jms</artifactId>
+			<version>1.0.3</version>
+		</dependency>	
+		<dependency>
+		    <groupId>org.apache.qpid</groupId>
+		    <artifactId>qpid-jms-client</artifactId>
+		    <version>0.41.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -20,9 +20,8 @@ public class Item {
 	public Item() {
 	}
 	
-	public Item(Long id, String name, Double value, Type type) {
+	public Item(String name, Double value, Type type) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.value = value;
 		this.type = type;

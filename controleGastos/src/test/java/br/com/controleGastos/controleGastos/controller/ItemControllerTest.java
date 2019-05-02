@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import br.com.controleGastos.controleGastos.controllers.ItemController;
 import br.com.controleGastos.controleGastos.model.Item;
 import br.com.controleGastos.controleGastos.model.Type;
+import br.com.controleGastos.controleGastos.model.User;
 import br.com.controleGastos.controleGastos.service.ItemService;
 
 @RunWith(SpringRunner.class)
@@ -44,8 +45,8 @@ public class ItemControllerTest {
 							}
 
 							@Override
-							public Item next() {
-								return new Item("objeto", 1.11, new Type(null, "expend"));
+							public Item next() {								
+								return new Item(null, "objeto", 1.11, Type.ENTRADA, new User(null, "fulaninho"));
 							}
 						};
 					}

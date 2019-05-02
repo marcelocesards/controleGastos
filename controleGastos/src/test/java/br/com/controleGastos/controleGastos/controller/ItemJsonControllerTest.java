@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import br.com.controleGastos.controleGastos.controllers.ItemJsonController;
 import br.com.controleGastos.controleGastos.model.Item;
 import br.com.controleGastos.controleGastos.model.Type;
+import br.com.controleGastos.controleGastos.model.User;
 import br.com.controleGastos.controleGastos.service.ItemService;
 
 @RunWith(SpringRunner.class)
@@ -34,7 +35,7 @@ public class ItemJsonControllerTest {
 	
 	@Test
 	public void getItems() throws Exception {
-		Item item = new Item("objeto", 1.11, new Type(null, "expend"));
+		Item item = new Item(null, "objeto", 1.11, Type.ENTRADA, new User(null, "fulaninho"));;
 		given(service.save(new Item()))
 		.willReturn(item);
 		 mockMvc.perform(post("/item")

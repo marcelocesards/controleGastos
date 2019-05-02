@@ -2,6 +2,8 @@ package br.com.controleGastos.controleGastos.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,17 +16,30 @@ public class Item {
 	private String name;
 	private Double value;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@Enumerated(EnumType.STRING)
 	private Type type;
+	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private User user;
 
 	public Item() {
 	}
-	
-	public Item(String name, Double value, Type type) {
+
+	public Item(Long id, String name, Double value, Type type, User user) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.value = value;
 		this.type = type;
+		this.user = user;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getName() {
@@ -61,6 +76,6 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", value=" + value + ", type=" + type + "]";
-	}	
+		return "Item [id=" + id + ", name=" + name + ", value=" + value + ", type=" + type + ", user=" + user + "]";
+	}
 }

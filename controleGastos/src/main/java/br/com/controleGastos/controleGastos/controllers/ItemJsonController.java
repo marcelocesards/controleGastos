@@ -1,8 +1,5 @@
 package br.com.controleGastos.controleGastos.controllers;
 
-import javax.jms.JMSException;
-import javax.naming.NamingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,19 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.controleGastos.controleGastos.jms.consumer.Producer;
+import com.google.gson.Gson;
+
 import br.com.controleGastos.controleGastos.model.Item;
-import br.com.controleGastos.controleGastos.service.ItemService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/item")
-public class ItemJsonController {
-	@Autowired
-	private ItemService service;
-	
+public class ItemJsonController {	
 	@Autowired private JmsTemplate jmsTemplate;
 	
 	@ApiOperation(value = "Faz um novo lançamento", 
@@ -38,14 +32,8 @@ public class ItemJsonController {
 			consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public Item create(@RequestBody Item item){
-		service.save(item);
-		try {
-			new Producer().testeJMS(item);
-		} catch (NamingException | JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Item create(@RequestBody Item item){		
+		jmsTemplate.convertAndSend("launches.queue", new Gson().toJson(item));
 		return item;
 	}
 }

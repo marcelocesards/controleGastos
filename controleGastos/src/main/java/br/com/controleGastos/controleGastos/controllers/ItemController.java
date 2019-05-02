@@ -1,15 +1,11 @@
 package br.com.controleGastos.controleGastos.controllers;
 
-import javax.jms.JMSException;
-import javax.naming.NamingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.controleGastos.controleGastos.jms.consumer.Consumer;
 import br.com.controleGastos.controleGastos.model.Item;
 import br.com.controleGastos.controleGastos.service.ItemService;
 import io.swagger.annotations.ApiOperation;

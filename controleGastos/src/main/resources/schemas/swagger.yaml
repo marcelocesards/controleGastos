@@ -1,0 +1,196 @@
+swagger: '2.0'
+info:
+  description: Esta é uma API para lançamento de despesas e proventos no controle de gastos
+  version: 1.0.0
+  title: API Para lançamento de despesas e proventos
+  license:
+    name: Apache License Version 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+host: 'localhost:9000'
+basePath: /
+tags:
+  - name: item-controller
+    description: Item Controller
+  - name: item-json-controller
+    description: Item Json Controller
+paths:
+  /item:
+    get:
+      tags:
+        - item-controller
+      summary: Lista de lançamentos
+      description: Lista os lançamentos de todas as depesas e proventos
+      operationId: getAllUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: Lançamentos Listados com sucesso
+          schema:
+            type: string
+        '401':
+          description: Você não está autorizado a visualizar este recurso
+        '403':
+          description: O acessar a este recurso foi negado
+        '404':
+          description: O recurso não foi encontrado
+    post:
+      tags:
+        - item-json-controller
+      summary: Faz um novo lançamento
+      description: Faz um novo lançamento de depesa ou provento
+      operationId: createUsingPOST
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: item
+          description: item
+          required: true
+          schema:
+            $ref: '#/definitions/Item'
+      responses:
+        '201':
+          description: Lançamento incluído com sucesso
+          schema:
+            $ref: '#/definitions/Item'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /budget:
+    get:
+      tags:
+        - budget-controller
+      summary: Lista de orçamentos
+      description: Lista todos os orçamentos
+      operationId: getAllBudgets
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: Orçamentos Listados com sucesso
+          schema:
+            type: string
+        '401':
+          description: Você não está autorizado a visualizar este recurso
+        '403':
+          description: O acessar a este recurso foi negado
+        '404':
+          description: O recurso não foi encontrado
+    post:
+      tags:
+        - budget-controller
+      summary: Cria um novo orçamento
+      description: Permite a criação de um novo orçamento
+      operationId: createBudget
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: budget
+          description: budget
+          required: true
+          schema:
+            $ref: '#/definitions/Budget'
+      responses:
+        '201':
+          description: Budget criado com sucesso
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+definitions:
+  Budget:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      initialDate:
+        type: string
+        format: date-time
+      finalDate:
+        type: string
+        format: date-time
+      items: 
+        type: array
+        items:
+          $ref: '#/definitions/Item'
+      debitValue:
+        type: number
+        format: double
+      procideValue:
+        type: number
+        format: double
+    title: Budget
+  Item:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      type:
+        type: string
+        enum:
+          - ENTRADA
+          - SAIDA
+      status:
+        type: string
+        enum:
+          - PAGO
+          - PENDENTE
+      purchaseDate:
+        type: string
+        format: date-time
+      paymentDate:
+        type: string
+        format: date-time
+      numberOfPortions:
+        type: integer
+      paymentMethod: 
+        $ref: '#/definitions/PaymentMethod'
+      user:
+        $ref: '#/definitions/User'
+      value:
+        type: number
+        format: double
+    title: Item
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    title: User
+  PaymentMethod:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      closingDay:
+        type: integer
+      paymentDay:
+        type: integer
+    title: PaymentMethod

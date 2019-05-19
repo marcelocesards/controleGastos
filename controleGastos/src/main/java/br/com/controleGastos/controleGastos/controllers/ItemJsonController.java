@@ -31,7 +31,8 @@ public class ItemJsonController {
 			consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public Item create(@RequestBody Item item){		
+	public Item create(@RequestBody Item item){	
+		System.out.println(item);
 		producer.send(item);
 		return item;
 	}

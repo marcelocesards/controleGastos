@@ -3,12 +3,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Lançamentos</title>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 
 	<div class="container">
 	<h1>Lançamentos</h1>
+	<form action="budget.html" th:attr="action=@{/budget}">
+	  <fieldset>
+	    <input type="text" name="email" />
+	    <input type="submit" value="Subscribe me!" th:attr="value=#{budget.submit}"/>
+	  </fieldset>
+	</form>
 		<div id="Lançamentos">
 			<table class="table table-hover">
 				<thead>

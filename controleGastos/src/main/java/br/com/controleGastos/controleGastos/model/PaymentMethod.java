@@ -163,6 +163,11 @@ public class PaymentMethod {
 		this.closingDay = closingDay;
 		this.paymentDay = paymentDay;
 	}
+
+	public PaymentMethod() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 }

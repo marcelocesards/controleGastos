@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Orçamentos</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="container">
+	<h1>Orçamentos</h1>
+		<div id="Orçamentos">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>tipo</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tr th:each="budget : ${budgets}">
+					<td><a href="budget.html" th:href="@{/budget/{id}(id=${budget.id})}"><span th:text="${budget.id}"></span></a></td>
+					<td><a href="budget.html" th:href="@{/budget/{id}(id=${budget.id})}"><span th:text="${budget.name}"></span></a></td>
+					<td><a href="budget.html" th:href="@{/budget/{id}(id=${budget.id})}"><span th:text="${budget.initialDate}"></span></a></td>
+					<td><a href="budget.html" th:href="@{/budget/{id}(id=${budget.id})}"><span th:text="${budget.finalDate}"></span></a></td>
+				</tr>
+
+			</table>
+		</div>
+
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>
